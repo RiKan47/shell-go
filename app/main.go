@@ -11,25 +11,38 @@ import (
 // var _ = fmt.Print
 
 func main() {
+REPL:
 	for {
 		fmt.Print("$ ")
-		cmd, err := bufio.NewReader(os.Stdin).ReadString('\n')
+		input, err := bufio.NewReader(os.Stdin).ReadString('\n')
 		if err != nil {
 			fmt.Print(err)
 		}
-		cmd = strings.TrimSpace(cmd)
+		// cmd = strings.TrimSpace(cmd)
+		args := strings.Fields(input)
+		cmd := args[0]
 
-		// switch cmd {
-		// case "echo":
-		// 	fmt.Println()
-		// 	case "exit"
-		// }
-		if strings.HasPrefix(cmd, "echo") {
-			fmt.Println(cmd[5:])
-		} else if cmd == "exit" {
-			break
-		} else {
+		switch cmd {
+		case "echo":
+			for i := 1; i < len(args)-1; i++ {
+				fmt.Print(args[i] + " ")
+			}
+			fmt.Println(args[len(args)-1])
+		case "exit":
+			break REPL
+		default:
 			fmt.Println(cmd + ": command not found")
 		}
+		// if cmd == "echo" {
+		// 	// fmt.Println(cmd[5:])
+		// 	for i := 1; i < len(args)-1; i++ {
+		// 		fmt.Print(args[i] + " ")
+		// 	}
+		// 	fmt.Println(args[len(args)-1])
+		// } else if cmd == "exit" {
+		// 	break
+		// } else {
+		// 	fmt.Println(cmd + ": command not found")
+		// }
 	}
 }
