@@ -11,10 +11,19 @@ import (
 
 func main() {
 	// TODO: Uncomment the code below to pass the first stage
-	fmt.Print("$ ")
-	command, err := bufio.NewReader(os.Stdin).ReadString('\n')
-	if err != nil {
-		fmt.Print(err)
+	// fmt.Print("$ ")
+	// command, err := bufio.NewReader(os.Stdin).ReadString('\n')
+	// if err != nil {
+	// 	fmt.Print(err)
+	// }
+	// fmt.Println(command[:len(command)-1] + ": command not found")
+
+	for {
+		fmt.Print("$ ")
+		cmd, err := bufio.NewReader(os.Stdin).ReadString('\n')
+		if err != nil {
+			fmt.Print(err)
+		}
+		fmt.Println(cmd[:len(cmd)-1] + ": command not found")
 	}
-	fmt.Println(command[:len(command)-1] + ": command not found")
 }
