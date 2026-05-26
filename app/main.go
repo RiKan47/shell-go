@@ -62,8 +62,7 @@ REPL:
 				if err != nil {
 					fmt.Printf("Error: %s\n", err)
 				}
-
-				fmt.Println("$ " + string(out))
+				fmt.Print(string(out))
 			} else {
 				fmt.Println(cmd + ": command not found")
 			}
