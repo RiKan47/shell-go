@@ -64,6 +64,10 @@ REPL:
 			}
 			fmt.Println(path)
 		case "cd":
+			if args[1] == "~" {
+				path := os.Getenv("HOME")
+				args[1] = path
+			}
 			err := os.Chdir(args[1])
 			if err != nil {
 				fmt.Println("cd: " + args[1] + ": No such file or directory")
