@@ -23,6 +23,7 @@ func main() {
 		"echo": true,
 		"exit": true,
 		"pwd":  true,
+		"cd":   true,
 	}
 
 REPL:
@@ -62,6 +63,11 @@ REPL:
 				fmt.Println(err)
 			}
 			fmt.Println(path)
+		case "cd":
+			err := os.Chdir(args[1])
+			if err != nil {
+				fmt.Print("cd " + args[1] + ": No such file or directory")
+			}
 		default:
 			if path, _ := exec.LookPath((cmd)); path != "" {
 				userCmd := exec.Command(cmd, args[1:]...)
