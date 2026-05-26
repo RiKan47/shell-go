@@ -22,6 +22,7 @@ func main() {
 		"type": true,
 		"echo": true,
 		"exit": true,
+		"pwd":  true,
 	}
 
 REPL:
@@ -55,6 +56,12 @@ REPL:
 					fmt.Println(args[1] + ": not found")
 				}
 			}
+		case "pwd":
+			path, err := os.Getwd()
+			if err != nil {
+				fmt.Println(err)
+			}
+			fmt.Println(path)
 		default:
 			if path, _ := exec.LookPath((cmd)); path != "" {
 				userCmd := exec.Command(cmd, args[1:]...)
