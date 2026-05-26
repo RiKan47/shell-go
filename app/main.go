@@ -63,7 +63,7 @@ REPL:
 					fmt.Printf("Error: %s\n", err)
 				}
 
-				fmt.Println(string(out))
+				fmt.Println("$ " + string(out))
 			} else {
 				fmt.Println(cmd + ": command not found")
 			}
