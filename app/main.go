@@ -10,7 +10,19 @@ import (
 // Ensures gofmt doesn't remove the "fmt" import in stage 1 (feel free to remove this!)
 // var _ = fmt.Print
 
+// type helper func(string) (bool, error)
+
 func main() {
+
+	cmdDb := map[string]bool{
+		// "type": func(s string) (bool, error){
+		// 	fmt.Println()
+		// }
+		"type": true,
+		"echo": true,
+		"exit": true,
+	}
+
 REPL:
 	for {
 		fmt.Print("$ ")
@@ -30,6 +42,13 @@ REPL:
 			fmt.Println(args[len(args)-1])
 		case "exit":
 			break REPL
+		// case "type":
+		case "type":
+			if _, ok := cmdDb[args[1]]; ok {
+				fmt.Println(args[1] + " is a shell builtin")
+			} else {
+				fmt.Println(args[1] + ": not found")
+			}
 		default:
 			fmt.Println(cmd + ": command not found")
 		}
