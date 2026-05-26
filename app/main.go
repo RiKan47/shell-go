@@ -56,7 +56,17 @@ REPL:
 				}
 			}
 		default:
-			fmt.Println(cmd + ": command not found")
+			if path, _ := exec.LookPath((cmd)); path != "" {
+				userCmd := exec.Command(cmd, args[1:]...)
+				out, err := userCmd.Output()
+				if err != nil {
+					fmt.Printf("Error: %s\n", err)
+				}
+
+				fmt.Println(string(out))
+			} else {
+				fmt.Println(cmd + ": command not found")
+			}
 		}
 		// if cmd == "echo" {
 		// 	// fmt.Println(cmd[5:])
