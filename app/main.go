@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"fmt"
 	"os"
+	"os/exec"
 	"strings"
 )
 
@@ -47,7 +48,12 @@ REPL:
 			if _, ok := cmdDb[args[1]]; ok {
 				fmt.Println(args[1] + " is a shell builtin")
 			} else {
-				fmt.Println(args[1] + ": not found")
+				// dirs := os.Args
+				if path, _ := exec.LookPath(args[1]); path != "" {
+					fmt.Println(args[1] + " is " + path)
+				} else {
+					fmt.Println(args[1] + ": not found")
+				}
 			}
 		default:
 			fmt.Println(cmd + ": command not found")
