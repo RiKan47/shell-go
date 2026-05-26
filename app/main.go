@@ -66,7 +66,7 @@ REPL:
 		case "cd":
 			err := os.Chdir(args[1])
 			if err != nil {
-				fmt.Print("cd " + args[1] + ": No such file or directory")
+				fmt.Println("cd: " + args[1] + ": No such file or directory")
 			}
 		default:
 			if path, _ := exec.LookPath((cmd)); path != "" {
